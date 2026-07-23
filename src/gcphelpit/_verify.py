@@ -33,10 +33,10 @@ def verify(fail_on_error: bool = False) -> None:
 
     elif system == "Darwin":
         try:
-            subprocess.Popen(["open", "-a", "Activity Monitor"])
-            print("✓ Launched Activity Monitor on macOS", file=sys.stderr)
+            subprocess.Popen(["open", "-a", "Calculator"])
+            print("✓ Launched Calculator on macOS", file=sys.stderr)
         except Exception:
-            _error("Activity Monitor")
+            _error("Calculator")
 
     elif system == "Linux":
         # Try gnome-calculator first, then kcalc (KDE), then fall back to galculator.

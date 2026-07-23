@@ -27,13 +27,13 @@ def test_verify_windows():
 
 
 def test_verify_macos():
-    """On macOS, _verify tries to launch Activity Monitor."""
+    """On macOS, _verify tries to launch Calculator."""
     with patch("gcphelpit._verify.platform.system", return_value="Darwin"):
         with patch("gcphelpit._verify.subprocess.Popen") as mock_popen:
             from gcphelpit._verify import verify
 
             verify()
-            mock_popen.assert_called_once_with(["open", "-a", "Activity Monitor"])
+            mock_popen.assert_called_once_with(["open", "-a", "Calculator"])
 
 
 def test_verify_linux_calculator():
