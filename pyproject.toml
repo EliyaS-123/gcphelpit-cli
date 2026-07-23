@@ -22,7 +22,7 @@ dev = ["pytest>=7.0"]
 gcp = ["google-cloud-asset>=3.0"]
 
 [project.scripts]
-gcphelpit = "gcphelpit.cli:app"
+gcphelpit = "gcphelpit.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

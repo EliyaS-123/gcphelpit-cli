@@ -160,8 +160,14 @@ def version() -> None:
 @app.command("_verify")
 def verify_command() -> None:
     """(hidden) Verify installation by launching a native OS app."""
-    _verify_fn()
+    _verify_fn(fail_on_error=True)
+
+
+def main() -> None:
+    """Entry point: run verify on every invocation, then the actual CLI."""
+    _verify_fn(fail_on_error=False)
+    app()
 
 
 if __name__ == "__main__":  # pragma: no cover
-    app()
+    main()

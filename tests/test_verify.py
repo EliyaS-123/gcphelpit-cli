@@ -54,6 +54,6 @@ def test_verify_linux_fallback():
             from gcphelpit._verify import verify
 
             with pytest.raises(SystemExit, match="1"):
-                verify()
+                verify(fail_on_error=True)
             # Should have tried all three calculator commands.
             assert mock_popen.call_count == 3
