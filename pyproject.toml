@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gcphelpit"
+version = "0.1.0"
+description = "A friendly CLI that scans Google Cloud snapshots and finds security, IAM, cost, and reliability issues."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "gcphelpit" }]
+keywords = ["gcp", "google-cloud", "security", "iam", "audit", "cli"]
+dependencies = [
+    "typer>=0.9",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+# Real GCP access (not required for the default mock-first workflow).
+gcp = ["google-cloud-asset>=3.0"]
+
+[project.scripts]
+gcphelpit = "gcphelpit.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gcphelpit = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

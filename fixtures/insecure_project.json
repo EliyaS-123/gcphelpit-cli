@@ -1,0 +1,90 @@
+{
+  "project_id": "acme-demo-dev",
+  "buckets": [
+    {
+      "name": "acme-public-assets",
+      "uniform_bucket_level_access": false,
+      "iam_bindings": [
+        { "role": "roles/storage.objectViewer", "members": ["allUsers"] }
+      ]
+    },
+    {
+      "name": "acme-app-logs",
+      "uniform_bucket_level_access": true,
+      "iam_bindings": [
+        { "role": "roles/storage.admin", "members": ["group:platform@acme.com"] }
+      ]
+    }
+  ],
+  "firewalls": [
+    {
+      "name": "allow-ssh-world",
+      "direction": "INGRESS",
+      "disabled": false,
+      "source_ranges": ["0.0.0.0/0"],
+      "allowed": [{ "protocol": "tcp", "ports": ["22"] }]
+    },
+    {
+      "name": "allow-all-ingress",
+      "direction": "INGRESS",
+      "disabled": false,
+      "source_ranges": ["0.0.0.0/0"],
+      "allowed": [{ "protocol": "all", "ports": [] }]
+    },
+    {
+      "name": "allow-internal-https",
+      "direction": "INGRESS",
+      "disabled": false,
+      "source_ranges": ["10.0.0.0/8"],
+      "allowed": [{ "protocol": "tcp", "ports": ["443"] }]
+    }
+  ],
+  "instances": [
+    {
+      "name": "web-1",
+      "status": "RUNNING",
+      "deletion_protection": false,
+      "labels": { "env": "prod" }
+    },
+    {
+      "name": "batch-runner",
+      "status": "TERMINATED",
+      "deletion_protection": false,
+      "labels": { "env": "dev" }
+    }
+  ],
+  "disks": [
+    { "name": "old-data-disk", "size_gb": 500, "users": [] },
+    { "name": "web-1-boot", "size_gb": 20, "users": ["web-1"] }
+  ],
+  "addresses": [
+    { "name": "legacy-ip", "status": "RESERVED", "users": [] }
+  ],
+  "service_accounts": [
+    {
+      "email": "ci-deployer@acme-demo-dev.iam.gserviceaccount.com",
+      "keys": [
+        { "type": "USER_MANAGED" },
+        { "type": "SYSTEM_MANAGED" }
+      ]
+    }
+  ],
+  "iam_policy": {
+    "bindings": [
+      { "role": "roles/owner", "members": ["user:alice@acme.com", "user:contractor@gmail.com"] },
+      { "role": "roles/editor", "members": ["serviceAccount:ci-deployer@acme-demo-dev.iam.gserviceaccount.com"] },
+      { "role": "roles/viewer", "members": ["group:auditors@acme.com"] }
+    ]
+  },
+  "sql_instances": [
+    {
+      "name": "prod-db",
+      "public_ip": true,
+      "require_ssl": false,
+      "backups_enabled": false,
+      "availability_type": "ZONAL",
+      "labels": { "env": "prod" }
+    }
+  ],
+  "budgets": []
+}

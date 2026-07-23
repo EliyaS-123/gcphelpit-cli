@@ -1,0 +1,60 @@
+{
+  "project_id": "acme-prod",
+  "buckets": [
+    {
+      "name": "acme-prod-assets",
+      "uniform_bucket_level_access": true,
+      "iam_bindings": [
+        { "role": "roles/storage.objectViewer", "members": ["group:platform@acme.com"] }
+      ]
+    }
+  ],
+  "firewalls": [
+    {
+      "name": "allow-internal-https",
+      "direction": "INGRESS",
+      "disabled": false,
+      "source_ranges": ["10.0.0.0/8"],
+      "allowed": [{ "protocol": "tcp", "ports": ["443"] }]
+    }
+  ],
+  "instances": [
+    {
+      "name": "web-1",
+      "status": "RUNNING",
+      "deletion_protection": true,
+      "labels": { "env": "prod" }
+    }
+  ],
+  "disks": [
+    { "name": "web-1-boot", "size_gb": 20, "users": ["web-1"] }
+  ],
+  "addresses": [
+    { "name": "web-ip", "status": "IN_USE", "users": ["web-1"] }
+  ],
+  "service_accounts": [
+    {
+      "email": "workload@acme-prod.iam.gserviceaccount.com",
+      "keys": [{ "type": "SYSTEM_MANAGED" }]
+    }
+  ],
+  "iam_policy": {
+    "bindings": [
+      { "role": "roles/viewer", "members": ["group:auditors@acme.com"] },
+      { "role": "roles/compute.admin", "members": ["group:platform@acme.com"] }
+    ]
+  },
+  "sql_instances": [
+    {
+      "name": "prod-db",
+      "public_ip": false,
+      "require_ssl": true,
+      "backups_enabled": true,
+      "availability_type": "REGIONAL",
+      "labels": { "env": "prod" }
+    }
+  ],
+  "budgets": [
+    { "name": "monthly", "amount": 5000 }
+  ]
+}
