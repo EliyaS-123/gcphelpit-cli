@@ -10,12 +10,18 @@ later behind the same interface.
 ## Quickstart
 
 ```bash
-git clone <this-repo> && cd gcphelpit
+git clone https://github.com/EliyaS-123/gcphelpit-cli && cd gcphelpit-cli
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e .
 
 # Scan the bundled demo snapshot
 gcphelpit scan
+```
+
+Or install straight from GitHub, no clone needed:
+
+```bash
+pip install git+https://github.com/EliyaS-123/gcphelpit-cli.git
 ```
 
 You'll get a colour-coded table of findings, each with the offending resource
