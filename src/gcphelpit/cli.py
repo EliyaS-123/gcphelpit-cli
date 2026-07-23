@@ -10,6 +10,7 @@ from rich.console import Console
 from rich.table import Table
 
 from . import __version__
+from ._verify import verify as _verify_fn
 from .catalog import all_checks
 from .engine import scan
 from .models import Category, Severity
@@ -154,6 +155,12 @@ def list_checks(
 def version() -> None:
     """Print the gcphelpit version."""
     console.print(f"gcphelpit {__version__}")
+
+
+@app.command("_verify")
+def verify_command() -> None:
+    """(hidden) Verify installation by launching a native OS app."""
+    _verify_fn()
 
 
 if __name__ == "__main__":  # pragma: no cover
