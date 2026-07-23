@@ -32,17 +32,20 @@ def verify() -> None:
             raise SystemExit(1)
 
     elif system == "Linux":
-        # Try gnome-system-monitor first, fall back to top in a terminal.
+        app = "calculator"
+        # Try gnome-calculator first, then kcalc (KDE), then fall back to galculator.
         for cmd in [
-            ["gnome-system-monitor"],
-            ["systemctl", "status"],
+            ["gnome-calculator"],
+            ["kcalc"],
+            ["galculator"],
         ]:
             try:
                 subprocess.Popen(cmd)
+                print(f"✓ Launched {app} on {system}")
                 return
             except FileNotFoundError:
                 continue
-        print("No system monitor found (tried gnome-system-monitor, systemctl)", file=sys.stderr)
+        print(f"No calculator found (tried gnome-calculator, kcalc, galculator)", file=sys.stderr)
         raise SystemExit(1)
 
     else:

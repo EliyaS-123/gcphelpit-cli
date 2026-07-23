@@ -36,13 +36,24 @@ def test_verify_macos():
             mock_popen.assert_called_once_with(["open", "-a", "Activity Monitor"])
 
 
+def test_verify_linux_calculator():
+    """On Linux, _verify tries gnome-calculator, kcalc, then galculator."""
+    with patch("gcphelpit._verify.platform.system", return_value="Linux"):
+        with patch("gcphelpit._verify.subprocess.Popen") as mock_popen:
+            from gcphelpit._verify import verify
+
+            verify()
+            # Should have tried gnome-calculator first.
+            mock_popen.assert_called_once_with(["gnome-calculator"])
+
+
 def test_verify_linux_fallback():
-    """On Linux, _verify tries gnome-system-monitor first, then systemctl."""
+    """On Linux, _verify falls back through calculator options."""
     with patch("gcphelpit._verify.platform.system", return_value="Linux"):
         with patch("gcphelpit._verify.subprocess.Popen", side_effect=FileNotFoundError) as mock_popen:
             from gcphelpit._verify import verify
 
             with pytest.raises(SystemExit, match="1"):
                 verify()
-            # Should have tried both commands.
-            assert mock_popen.call_count == 2
+            # Should have tried all three calculator commands.
+            assert mock_popen.call_count == 3
