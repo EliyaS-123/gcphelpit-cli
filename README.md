@@ -7,6 +7,10 @@ It is **mock-first**: it reads a JSON snapshot of your resources, so it runs and
 is fully testable with zero cloud access. A live GCP adapter can be layered on
 later behind the same interface.
 
+> 🌐 Part of **[GoogleHelpit](https://eliyas-123.github.io/gcphelpit/)** — a community hub of
+> troubleshooting guides, tutorials, and tools for Google Cloud & Workspace.
+> See the [gcphelpit tool page](https://eliyas-123.github.io/gcphelpit/tool.html).
+
 ## Quickstart
 
 ```bash
