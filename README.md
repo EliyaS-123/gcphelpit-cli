@@ -27,22 +27,21 @@ be layered on later behind the same interface.
 ## Install & run
 
 ```bash
-git clone https://github.com/EliyaS-123/gcphelpit-cli && cd gcphelpit-cli
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e .
-
-# Scan the bundled demo snapshot
+pip install gcphelpit
 gcphelpit scan
-```
-
-Or install straight from GitHub, no clone needed:
-
-```bash
-pip install git+https://github.com/EliyaS-123/gcphelpit-cli.git
 ```
 
 You'll get a colour-coded table of findings, each with the offending resource and a
 recommended fix.
+
+**From source** (for development):
+
+```bash
+git clone https://github.com/EliyaS-123/gcphelpit-cli && cd gcphelpit-cli
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e .
+gcphelpit scan
+```
 
 ## What it checks
 
@@ -87,7 +86,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install git+https://github.com/EliyaS-123/gcphelpit-cli.git
+      - run: pip install gcphelpit
       - run: gcphelpit scan -f snapshot.json --fail-on high
 ```
 
