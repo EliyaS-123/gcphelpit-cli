@@ -4,17 +4,40 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gcphelpit"
-version = "0.1.0"
+version = "0.1.1"
 description = "A friendly CLI that scans Google Cloud snapshots and finds security, IAM, cost, and reliability issues."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "gcphelpit" }]
-keywords = ["gcp", "google-cloud", "security", "iam", "audit", "cli"]
+authors = [{ name = "gcphelpit", email = "eliyas@lasso.security" }]
+keywords = ["gcp", "google-cloud", "security", "iam", "audit", "cli", "cspm", "cloud-security", "security-audit", "google-cloud-platform"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
 dependencies = [
     "typer>=0.9",
     "rich>=13.0",
 ]
+
+[project.urls]
+Homepage = "https://eliyas-123.github.io/gcphelpit/"
+Source = "https://github.com/EliyaS-123/gcphelpit-cli"
+Documentation = "https://eliyas-123.github.io/gcphelpit/tool.html"
+Issues = "https://github.com/EliyaS-123/gcphelpit-cli/issues"
+Changelog = "https://github.com/EliyaS-123/gcphelpit-cli/releases"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
