@@ -13,9 +13,9 @@ It is **mock-first**: it reads a JSON snapshot of your resources, so it runs —
 fully testable — with **zero live cloud access or credentials**. A live GCP adapter can
 be layered on later behind the same interface.
 
-> 🌐 Part of **[GoogleHelpit](https://eliyas-123.github.io/gcphelpit/)** — a community hub of
-> troubleshooting guides, tutorials, and tools for Google Cloud & Workspace.
-> See the [gcphelpit tool page](https://eliyas-123.github.io/gcphelpit/tool.html).
+**📦 Install from PyPI:** [`pip install gcphelpit`](https://pypi.org/project/gcphelpit/)
+**🌐 Documentation & guides:** [https://eliyas-123.github.io/gcphelpit/](https://eliyas-123.github.io/gcphelpit/)
+**📋 Check catalog:** [All 16 checks →](https://eliyas-123.github.io/gcphelpit/checks.html)
 
 ## Who is this for
 
